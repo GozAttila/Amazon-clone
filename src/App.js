@@ -3,14 +3,15 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useStateValue} from "./StateProvider";
 import {auth} from "./firebase";
 
+import {SET_USER} from "./actionTypes";
+
 import './App.css';
 import Home from "./Home";
 import Header from "./Header";
 import Login from "./Login";
 import Checkout from "./Checkout";
-import {SET_USER} from "./actionTypes";
+import Payment from "./Payment";
 
-// import Payment from "./Payment";
 // import { loadStripe } from "@stripe/stripe-js";
 // import { Elements } from "@stripe/react-stripe-js";
 // import { ToastContainer } from "react-toastify";
@@ -63,12 +64,13 @@ function App() {
                             <Checkout />
                         </Route>
 
-                        {/*<Route path="/payment">*/}
-                        {/*    <Header />*/}
+                        <Route path="/payment">
+                            <Header />
+                            <Payment />
                         {/*    <Elements stripe={promise}>*/}
                         {/*        <Payment />*/}
                         {/*    </Elements>*/}
-                        {/*</Route>*/}
+                        </Route>
 
                         <Route path="/">
                             <Header />

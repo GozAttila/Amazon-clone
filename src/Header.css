@@ -46,7 +46,7 @@
 .header__optionBasket {
     display: flex;
     align-items: center;
-    color: white;
+    color: #ffffff;
 }
 
 .header__basketCount {
@@ -64,5 +64,5 @@
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
-    color: white;
+    color: #ffffff;
 }
