@@ -7,6 +7,18 @@ import './App.css';
 import Home from "./Home";
 import Header from "./Header";
 import Login from "./Login";
+import Checkout from "./Checkout";
+import {SET_USER} from "./actionTypes";
+
+// import Payment from "./Payment";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import { ToastContainer } from "react-toastify";
+// import Orders from "./Orders";
+//
+// const promise = loadStripe(
+//     "pk_test_51HPvTBIOljmntfcQC1n0EJpWiklLHfLLbvIRmbtahMdllY6NNLF5vu7hw9O5PYBaTZdmf3ppAtWbhTbCzPZnx0o500tCU9bjNq"
+// );
 
 function App() {
     const [{user}, dispatch] = useStateValue();
@@ -14,17 +26,15 @@ function App() {
     useEffect(() => {
 
         auth.onAuthStateChanged((authUser) => {
-            console.log("THE USER IS >>> ", authUser);
 
             if (authUser) {
-
                 dispatch({
-                    type: "SET_USER",
+                    type: SET_USER,
                     user: authUser,
                 });
             } else {
                 dispatch({
-                    type: "SET_USER",
+                    type: SET_USER,
                     user: null,
                 });
             }
@@ -34,19 +44,43 @@ function App() {
     return (
         <div className="app">
             <Router>
-                <Switch>
 
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
+                <div className="app">
 
-                    <Route path="/">
-                        <Header/>
-                        <Home/>
-                    </Route>
+                    <Switch>
 
+                        <Route path="/login">
+                            <Login />
+                        </Route>
 
-                </Switch>
+                        {/*<Route path="/orders">*/}
+                        {/*    <Header />*/}
+                        {/*    <Orders />*/}
+                        {/*</Route>*/}
+
+                        <Route path="/checkout">
+                            <Header />
+                            <Checkout />
+                        </Route>
+
+                        {/*<Route path="/payment">*/}
+                        {/*    <Header />*/}
+                        {/*    <Elements stripe={promise}>*/}
+                        {/*        <Payment />*/}
+                        {/*    </Elements>*/}
+                        {/*</Route>*/}
+
+                        <Route path="/">
+                            <Header />
+                            <Home />
+                        </Route>
+
+                    </Switch>
+
+                </div>
+
+                {/*<ToastContainer style={{ marginTop: "45px" }} />*/}
+
             </Router>
 
         </div>

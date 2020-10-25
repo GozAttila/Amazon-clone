@@ -3,13 +3,14 @@ import React from 'react';
 import {useStateValue} from "./StateProvider";
 
 import './Product.css';
+import {ADD_TO_BASKET} from "./actionTypes";
 
 const Product = ({id, title, image, price, rating}) => {
     const [{basket}, dispatch] = useStateValue();
 
     const addToBasket = () => {
         dispatch({
-            type: "ADD_TO_BASKET",
+            type: ADD_TO_BASKET,
             item: {
                 id: id,
                 title: title,
@@ -28,7 +29,7 @@ const Product = ({id, title, image, price, rating}) => {
                 <p>{title}</p>
 
                 <p className="product__price">
-                    <small>$</small>
+                    <small>€</small>
                     <strong>{price}</strong>
                 </p>
 
