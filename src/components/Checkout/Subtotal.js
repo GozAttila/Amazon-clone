@@ -1,6 +1,6 @@
 import React from 'react';
-import {useStateValue} from "./StateProvider";
-import {getBasketTotal} from "./reducer";
+import {useStateValue} from "../../store/StateProvider";
+import {getBasketTotal} from "../../store/reducer";
 import {useHistory} from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 

@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {useStateValue} from "./StateProvider";
+import {useStateValue} from "../../store/StateProvider";
 import CurrencyFormat from "react-currency-format";
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
-import axios from "./axios";
-import {db} from "./firebase";
+import axios from "../../axios/axios";
+import {db} from "../../firebase";
 
-import {getBasketTotal} from "./reducer";
+import {getBasketTotal} from "../../store/reducer";
 
 import "./Payment.css";
-import CheckoutProduct from "./CheckoutProduct";
+import CheckoutProduct from "../Checkout/CheckoutProduct";
 
 const Payment = () => {
     const history = useHistory();
@@ -25,16 +25,20 @@ const Payment = () => {
     const [clientSecret, setClientSecret] = useState("");
 
     useEffect(() => {
-        console.log("in payment useeffect, total", getBasketTotal(basket) * 100)
+        console.log("in payment useEffect, total", getBasketTotal(basket) * 100)
         const getClientSecret = async () => {
+            console.log("in getClientSecret")
             try {
             const response = await axios({
                 method: 'post',
                 url: `/payments/create?total=${getBasketTotal(basket) * 100}` // multiplier means the amount have to be in currency sub-units
             })
-            setClientSecret(response.data.clientSecret) }
-            catch (error) {console.log("useEffect error", error)}
+            setClientSecret(response.data.clientSecret)
+            console.log("in payment useEffect, response", response)
+            console.log("Client-secret", clientSecret)
+            } catch (error) {console.log("useEffect error", error)}
         }
+
         getClientSecret();
     }, [basket])
 
@@ -115,7 +119,10 @@ const Payment = () => {
                     </div>
                     <div className="payment__details">
                         <form onSubmit={handleSubmit}>
-                            <CardElement onChange={handleChange}/>
+                            <div className="payment__cardElement">
+                                <CardElement onChange={handleChange}/>
+                                <p className="payment__cardWarning">For testing, you must use card number<br />4242 4242 4242 4242<br />with any future date</p>
+                            </div>
                             <div className="payment__priceContainer">
                                 <CurrencyFormat
                                     renderText={(value) => <h3>Order Total: {value}</h3>}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {useStateValue} from "./StateProvider";
-import {auth} from "./firebase";
+import {useStateValue} from "../../store/StateProvider";
+import {auth} from "../../firebase";
 
 import './Header.css';
 
@@ -38,7 +38,7 @@ const Header = () => {
 
                 <Link to={!user && '/login'}>
                     <div onClick={handleAuthentication} className="header__option">
-                        <span className="header__optionLineOne">Hello {!user ? 'Guest' : user.email}</span>
+                        <span className="header__optionLineOne">Hello {!user ? 'Guest' : user?.email.split("@")[0]}</span>
                         <span className="header__optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
                     </div>
                 </Link>

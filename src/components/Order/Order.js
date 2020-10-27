@@ -3,7 +3,7 @@ import CurrencyFormat from "react-currency-format";
 import dayjs from "dayjs";
 
 import './Order.css'
-import CheckoutProduct from "./CheckoutProduct";
+import CheckoutProduct from "../Checkout/CheckoutProduct";
 
 
 function Order({order}) {
